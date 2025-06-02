@@ -7,7 +7,7 @@ const User = Schema({
     type: String,
     unique: true
   },
-  avatar: String,
+  password: String,
 },
 {
   timestamps: true

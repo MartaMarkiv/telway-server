@@ -26,5 +26,5 @@ app.use(cookieSession({
 app.use("/api", indexRouter);
 
 app.listen(port, () => {
-  console.log(`Chat app listening on port ${port}`);
+  console.log(`Server app listening on port ${port}`);
 });
