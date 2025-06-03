@@ -9,7 +9,14 @@ dotenv.config();
 const indexRouter = require("./routes/index");
 
 const app = express();
-app.use(cors());
+
+const corsOptions = {
+  origin: "http://localhost:5173",
+  optionsSuccessStatus: 200,
+  credentials: true, 
+};
+
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -20,7 +27,7 @@ app.use(cookieSession({
   keys: [process.env.SESSION_KEY],
   maxAge: 24 * 60 * 60 * 1000, // 1 день
   resave: true,
-    saveUninitialized: true,
+  saveUninitialized: true,
 }));
 
 app.use("/api", indexRouter);

@@ -8,6 +8,12 @@ const User = Schema({
     unique: true
   },
   password: String,
+  role: {
+    type: String,
+    enum: ["user", "admin"],
+    default: "user"
+  },
+  refreshToken: String
 },
 {
   timestamps: true
@@ -18,5 +24,7 @@ const UserModel = mongoose.model("User", User);
 module.exports = {
   model: UserModel,
   create:  (profile) => new UserModel(profile).save(),
+  updateToken:  (id, token) => UserModel.findOneAndUpdate({_id: id}, {refreshToken: token}),
   findByEmail:  (email) => UserModel.findOne({email}),
+  findById:  (_id) => UserModel.findOne({_id}),
 }
