@@ -3,6 +3,7 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const cookieSession = require("cookie-session");
+const cookieParser = require("cookie-parser");
 
 dotenv.config();
 
@@ -18,6 +19,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
+app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 const port = 3000;

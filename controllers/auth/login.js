@@ -15,8 +15,6 @@ module.exports =  async (req, res) => {
 
     bcrypt.compare(password, user.password, async(err, isMatch) => {
     if (isMatch) {
-        // Create a token
-        const token = jwt.sign({ id: user._id, username: user.name }, process.env.REFRESH_SECRET, { expiresIn: '24h' });
         const accessToken = tokenMethods.createAccessToken({ id: user._id });
         const refreshToken = tokenMethods.createRefreshToken({ id: user._id });
 

@@ -25,6 +25,8 @@ module.exports = {
   model: UserModel,
   create:  (profile) => new UserModel(profile).save(),
   updateToken:  (id, token) => UserModel.findOneAndUpdate({_id: id}, {refreshToken: token}),
+  deleteToken:  (id) => UserModel.findOneAndUpdate({_id: id}, {refreshToken: ""}),
   findByEmail:  (email) => UserModel.findOne({email}),
   findById:  (_id) => UserModel.findOne({_id}),
+  findByToken:  (refreshToken) => UserModel.findOne({refreshToken}),
 }
