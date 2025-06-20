@@ -11,13 +11,13 @@ const indexRouter = require("./routes/index");
 
 const app = express();
 
-// const corsOptions = {
-//   origin: process.env.NODE_ENV === "production" ? process.env.CLIENT_URL : "http://localhost:5173",
-//   optionsSuccessStatus: 200,
-//   credentials: true, 
-// };
+const corsOptions = {
+  origin: process.env.NODE_ENV === "production" ? "*" : "http://localhost:5173",
+  optionsSuccessStatus: 200,
+  credentials: true, 
+};
 
-// app.use(cors(corsOptions));
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
