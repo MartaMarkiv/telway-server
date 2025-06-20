@@ -12,11 +12,21 @@ const indexRouter = require("./routes/index");
 const app = express();
 
 const corsOptions = {
-  origin: process.env.NODE_ENV === "production" ? "*" : "http://localhost:5173",
-  optionsSuccessStatus: 200,
-  credentials: true, 
+  origin: (origin, callback) => {
+    const allowedOrigins = [process.env.CLIENT_URL, "http://localhost:5173"];
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  credentials: true,
 };
 
+console.log("CORS allowed origins:", corsOptions.origin);
+
+app.options("*", cors(corsOptions)); 
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(cookieParser());
