@@ -40,3 +40,7 @@ app.use("/api", indexRouter);
 app.listen(port, () => {
   console.log(`Server app listening on port ${port}`);
 });
+
+app.use("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+});

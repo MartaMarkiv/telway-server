@@ -4,9 +4,12 @@ module.exports = async(req, res) => {
   try {
     const { amount, currency = "usd" } = req.body;
 
+    console.log("In create Payment instance: ", req.user);
+
     const paymentIntent = await stripe.paymentIntents.create({
       amount: Math.round(amount * 1000 * 100) / 100,
       currency,
+      metadata: {userId: req.user._id.toString()},
       automatic_payment_methods: { enabled: true }
     });
 
