@@ -8,7 +8,8 @@ module.exports = async(req, res) => {
     console.log("FOunded user: ")
     console.log(user);
     if (!user) return res.status(404);
-    return res.status(200).json({user});
+    const {email, _id, name, role, balance, activeNumbers} = user;
+    return res.status(200).json({user:{email, name, balance, role, id:_id, activeNumbers}});
   } catch (error) {
     console.log("Error while getting user info: ", error);
     return res.status(500).json({success: false, message: "Server error"});

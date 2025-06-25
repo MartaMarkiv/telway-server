@@ -32,7 +32,9 @@ module.exports =  async (req, res) => {
           email: user.email,
           name: user.name,
           id: user._id,
-          role: user.role
+          role: user.role,
+          balance: user.balance,
+          activeNumbers: user.activeNumbers
         } });
       } else {
         return res.status(401).json({ error: 'Invalid credentials' });

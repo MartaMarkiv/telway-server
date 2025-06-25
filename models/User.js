@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const User = Schema({
   name: String,
   balance: Number,
+  activeNumbers: Number,
   email: {
     type: String,
     unique: true
@@ -27,6 +28,7 @@ module.exports = {
   create:  (profile) => new UserModel(profile).save(),
   updateToken:  (id, token) => UserModel.findOneAndUpdate({_id: id}, {refreshToken: token}),
   updateBalance:  (id, balance) => UserModel.findOneAndUpdate({_id: id}, {balance}),
+  updateUser:  (id, query) => UserModel.findOneAndUpdate({_id: id}, query),
   deleteToken:  (id) => UserModel.findOneAndUpdate({_id: id}, {refreshToken: ""}),
   findByEmail:  (email) => UserModel.findOne({email}),
   findById:  (_id) => UserModel.findOne({_id}),
