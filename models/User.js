@@ -3,8 +3,14 @@ const Schema = mongoose.Schema;
 
 const User = Schema({
   name: String,
-  balance: Number,
-  activeNumbers: Number,
+  balance: {
+    type: Number,
+    default: 0
+  },
+  activeNumbers: {
+    type: Number,
+    default: 0
+  },
   email: {
     type: String,
     unique: true

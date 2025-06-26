@@ -13,7 +13,7 @@ module.exports = async(req, res) => {
     const user = await UserModel.findById(userId);
     console.log(user);
 
-    const updatedBalance = user.balance || 0 + amount / 1000;
+    const updatedBalance = user.balance + amount / 1000;
 
     console.log("updatedBalance: ", updatedBalance);
 
