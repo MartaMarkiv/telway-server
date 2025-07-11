@@ -4,6 +4,9 @@ const UserModel = require("../../models/User");
 module.exports = async(req, res) => {
   try {
     console.log("WEBHOOK");
+    console.log(process.env.ENDPOINT_SECRET1);
+    const signature = request.headers['stripe-signature'];
+    console.log(signature);
 
     const {data} = req.body;
     console.log(data.object);
