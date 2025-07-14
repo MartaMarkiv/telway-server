@@ -1,12 +1,23 @@
-// const stripe = require("../../lib/stripe");
 const UserModel = require("../../models/User");
 
 module.exports = async(req, res) => {
   try {
     console.log("WEBHOOK");
-    console.log(process.env.ENDPOINT_SECRET1);
-    const signature = req.headers['stripe-signature'];
+    console.log(process.env.ENDPOINT_SECRET_1);
+    const signature = req.headers["stripe-signature"];
     console.log(signature);
+
+     try {
+      const event = stripe.webhooks.constructEvent(
+        req.body,
+        signature,
+        process.env.ENDPOINT_SECRET_1
+      );
+      console.log("EVENT: ", event);
+    } catch (err) {
+      console.log(`Webhook signature verification failed.`, err.message);
+      return res.sendStatus(400);
+    }
 
     const {data} = req.body;
     console.log(data.object);
@@ -22,7 +33,7 @@ module.exports = async(req, res) => {
 
     await UserModel.updateBalance(userId,updatedBalance);
 
-    return res.status(200).json({ message: "Success" });
+    return res.status(200).json({ message: "Success", received: true });
   } catch (error) {
     console.log("Error happened in webhook ", error);
     return res.status(500).json({message: error || "Error happened, please try again later"});
