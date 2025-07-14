@@ -22,7 +22,7 @@ const corsOptions = {
 console.log("CORS allowed origins:", corsOptions.origin);
 
 // app.options("*", cors(corsOptions));
-app.use("/payment/webhook", webhookController);
+app.use("/payment/webhook", express.raw({ type: 'application/json' }), webhookController);
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(cookieParser());
