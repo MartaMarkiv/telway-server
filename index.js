@@ -7,6 +7,8 @@ const cookieParser = require("cookie-parser");
 
 dotenv.config();
 
+const webhookController = require("./controllers/paymnet/webhook");
+
 const indexRouter = require("./routes/index");
 
 const app = express();
@@ -19,7 +21,8 @@ const corsOptions = {
 
 console.log("CORS allowed origins:", corsOptions.origin);
 
-// app.options("*", cors(corsOptions)); 
+// app.options("*", cors(corsOptions));
+app.use("payment/webhook", webhookController);
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(cookieParser());
