@@ -3,7 +3,7 @@ const UserModel = require("../../models/User");
 
 module.exports = async(req, res) => {
   try {
-    console.log("WEBHOOK");
+    console.log("UPDATED WEBHOOK");
     console.log(process.env.ENDPOINT_SECRET_1);
     const signature = req.headers["stripe-signature"];
     console.log(signature);
