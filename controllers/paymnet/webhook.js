@@ -1,3 +1,4 @@
+const stripe = require("../../lib/stripe");
 const UserModel = require("../../models/User");
 
 module.exports = async(req, res) => {
