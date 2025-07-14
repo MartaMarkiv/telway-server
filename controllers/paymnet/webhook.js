@@ -7,8 +7,10 @@ module.exports = async(req, res) => {
     const signature = req.headers["stripe-signature"];
     console.log(signature);
 
-     try {
-      const event = stripe.webhooks.constructEvent(
+    let event = "";
+
+    try {
+      event = stripe.webhooks.constructEvent(
         req.body,
         signature,
         process.env.ENDPOINT_SECRET_1
