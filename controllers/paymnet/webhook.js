@@ -27,7 +27,7 @@ module.exports = async(req, res) => {
     const user = await UserModel.findById(userId);
     console.log(user);
 
-    const updatedBalance = user.balance + amount / 1000;
+    const updatedBalance = user.balance + amount / 100;
 
     console.log("updatedBalance: ", updatedBalance);
 
