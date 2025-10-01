@@ -13,6 +13,8 @@ module.exports = async(req, res) => {
       automatic_payment_methods: { enabled: true }
     });
 
+    console.log(paymentIntent);
+
     return res.status(200).json({ clientSecret: paymentIntent.client_secret });
   } catch (error) {
     console.log("Error happened while creating stripe checkout session: ", error);
