@@ -5,7 +5,7 @@ module.exports = async(req, res) => {
     const { amount, currency = "usd" } = req.body;
 
 
-    const sendAmount = Math.round(amount * 100 * 100) / 1000;
+    const sendAmount = Math.round(amount * 100 * 1000) / 1000;
     console.log("---------  create sheet  ----------   ", sendAmount);
 
 
