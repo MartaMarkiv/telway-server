@@ -17,8 +17,8 @@ module.exports = async(req, res) => {
 
     const customer = await stripe.customers.create();
     const ephemeralKey = await stripe.ephemeralKeys.create( {customer: customer.id},{apiVersion:"2025-05-28.basil"});
-    console.log("ephemeralKey: ");
-    console.log(ephemeralKey);
+    console.log("paymentIntent.client_secret ==================: ");
+    console.log(paymentIntent.client_secret);
 
     return res.status(200).json({ clientSecret: paymentIntent.client_secret, ephemeralKey: ephemeralKey.secret, customer: customer.id});
   } catch (error) {
