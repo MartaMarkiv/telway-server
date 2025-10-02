@@ -21,6 +21,10 @@ module.exports = async(req, res) => {
       automatic_payment_methods: { enabled: true }
     });
 
+    console.log("PaymentIntent ID:", paymentIntent.id);
+console.log("ClientSecret:", paymentIntent.client_secret);
+console.log("Customer ID:", customer.id);
+console.log("EphemeralKey:", ephemeralKey.secret);
 
     return res.status(200).json({ clientSecret: paymentIntent.client_secret, ephemeralKey: ephemeralKey.secret, customer: customer.id});
   } catch (error) {
