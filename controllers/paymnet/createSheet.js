@@ -13,7 +13,7 @@ module.exports = async(req, res) => {
       automatic_payment_methods: { enabled: true }
     });
 
-    const ephemeralKey = await stripe.ephemeralKeys.create();
+    const ephemeralKey = await stripe.ephemeralKeys.create({apiVersion:"2025-05-28.basil"});
     console.log("ephemeralKey: ");
     console.log(ephemeralKey);
 
