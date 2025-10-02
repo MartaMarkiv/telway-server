@@ -10,7 +10,7 @@ module.exports = async(req, res) => {
 
 
     const customer = await stripe.customers.create();
-    const ephemeralKey = await stripe.ephemeralKeys.create( {customer: customer.id});
+    const ephemeralKey = await stripe.ephemeralKeys.create( {customer: customer.id},{apiVersion:"2025-09-30.clover"});
 
     const paymentIntent = await stripe.paymentIntents.create({
       amount: sendAmount,
