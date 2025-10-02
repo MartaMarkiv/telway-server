@@ -4,5 +4,6 @@ const stripeController = require("../controllers/paymnet");
 const router = express.Router();
 
 router.post("/stripe", stripeController.createPayment);
+router.post("/stripe-sheet", stripeController.createSheet);
 
 module.exports = router;
