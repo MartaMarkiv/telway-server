@@ -8,17 +8,20 @@ module.exports = async(req, res) => {
 
     const sendAmount = Math.round(amount * 1000 * 100) / 1000;
 
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount: sendAmount,
-      currency,
-      metadata: {userId: req.user.id},
-      automatic_payment_methods: { enabled: true }
-    });
-
     const customer = await stripe.customers.create();
     const ephemeralKey = await stripe.ephemeralKeys.create( {customer: customer.id},{apiVersion:"2025-05-28.basil"});
     console.log("paymentIntent.client_secret ==================: ");
     console.log(paymentIntent.client_secret);
+
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: sendAmount,
+      currency,
+      customer: customer.id,
+      metadata: {userId: req.user.id},
+      automatic_payment_methods: { enabled: true }
+    });
+
+
 
     return res.status(200).json({ clientSecret: paymentIntent.client_secret, ephemeralKey: ephemeralKey.secret, customer: customer.id});
   } catch (error) {
