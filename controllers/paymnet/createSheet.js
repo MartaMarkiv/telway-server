@@ -4,14 +4,13 @@ module.exports = async(req, res) => {
   try {
     const { amount, currency = "usd" } = req.body;
 
-    console.log("---------  create sheet  ----------");
 
-    const sendAmount = Math.round(amount * 1000 * 100) / 1000;
+    const sendAmount = Math.round(amount * 100) / 1000;
+    console.log("---------  create sheet  ----------   ", sendAmount);
+
 
     const customer = await stripe.customers.create();
     const ephemeralKey = await stripe.ephemeralKeys.create( {customer: customer.id},{apiVersion:"2025-05-28.basil"});
-    console.log("paymentIntent.client_secret ==================: ");
-    console.log(paymentIntent.client_secret);
 
     const paymentIntent = await stripe.paymentIntents.create({
       amount: sendAmount,
@@ -20,8 +19,6 @@ module.exports = async(req, res) => {
       metadata: {userId: req.user.id},
       automatic_payment_methods: { enabled: true }
     });
-
-
 
     return res.status(200).json({ clientSecret: paymentIntent.client_secret, ephemeralKey: ephemeralKey.secret, customer: customer.id});
   } catch (error) {
