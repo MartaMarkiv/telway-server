@@ -11,6 +11,8 @@ module.exports = async(req, res) => {
 
     const customer = await stripe.customers.create();
 
+    const ephemeralKey = await stripe.ephemeralKeys.create( {customer: customer.id},{apiVersion:"2022-11-15"});
+
     const paymentIntent = await stripe.paymentIntents.create({
       amount: sendAmount,
       currency,
@@ -19,7 +21,6 @@ module.exports = async(req, res) => {
       automatic_payment_methods: { enabled: true }
     });
 
-    const ephemeralKey = await stripe.ephemeralKeys.create( {customer: customer.id},{apiVersion:"2022-11-15"});
 
     return res.status(200).json({ clientSecret: paymentIntent.client_secret, ephemeralKey: ephemeralKey.secret, customer: customer.id});
   } catch (error) {
