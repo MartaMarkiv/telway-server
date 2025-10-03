@@ -3,6 +3,7 @@ const stripe = require("../../lib/stripe");
 module.exports = async(req, res) => {
   try {
     const { amount, currency = "usd" } = req.body;
+    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1")
 
     const sendAmount = Math.round(amount * 1000 * 100) / 1000;
 

@@ -4,7 +4,6 @@ module.exports = async(req, res) => {
   try {
     const { amount, currency = "usd" } = req.body;
 
-
     const sendAmount = Math.round(amount * 100);
     console.log("---------  create sheet  ----------   ", sendAmount);
 
@@ -17,13 +16,12 @@ module.exports = async(req, res) => {
       amount: sendAmount,
       currency,
       customer: customer.id,
-      metadata: {userId: req.user.id || "guest"},
       automatic_payment_methods: { enabled: true }
     });
 
     console.log("PaymentIntent ID:", paymentIntent.id);
 console.log("ClientSecret:", paymentIntent.client_secret);
-console.log("Customer ID:", customer.id);
+console.log("Customer ID:", customer.id, "    ");
 console.log("EphemeralKey:", ephemeralKey.secret);
 
     return res.status(200).json({ clientSecret: paymentIntent.client_secret, ephemeralKey: ephemeralKey.secret, customer: customer.id});
