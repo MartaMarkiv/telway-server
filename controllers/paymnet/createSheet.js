@@ -16,6 +16,7 @@ module.exports = async(req, res) => {
       amount: sendAmount,
       currency,
       customer: customer.id,
+      metadata: {userId: req.user.id},
       automatic_payment_methods: { enabled: true }
     });
 
