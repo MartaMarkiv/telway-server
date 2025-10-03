@@ -28,7 +28,7 @@ module.exports = async(req, res) => {
       clientSecret: paymentIntent.client_secret,
       ephemeralKey: ephemeralKey.secret,
       customer: customer.id,
-      publishableKey: process.env.VITE_STRIPE_PUBLIC_KEY_1
+      publishableKey: process.env.VITE_STRIPE_PUBLIC_KEY
     });
   } catch (error) {
     console.log("Error happened while creating stripe checkout session: ", error);
