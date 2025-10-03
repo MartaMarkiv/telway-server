@@ -24,7 +24,12 @@ console.log("ClientSecret:", paymentIntent.client_secret);
 console.log("Customer ID:", customer.id, "    ");
 console.log("EphemeralKey:", ephemeralKey.secret);
 
-    return res.status(200).json({ clientSecret: paymentIntent.client_secret, ephemeralKey: ephemeralKey.secret, customer: customer.id});
+    return res.status(200).json({
+      clientSecret: paymentIntent.client_secret,
+      ephemeralKey: ephemeralKey.secret,
+      customer: customer.id,
+      publishableKey: process.env.VITE_STRIPE_PUBLIC_KEY_1
+    });
   } catch (error) {
     console.log("Error happened while creating stripe checkout session: ", error);
     return res.status(500).json({message: error || "Error happened, please try again later"});
