@@ -4,14 +4,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const cookieSession = require("cookie-session");
 const cookieParser = require("cookie-parser");
-
-const { registerSocketHandlers } = require("./controllers/socket/socketController.js");
-
-
-const { Server } = require("socket.io");
-
-// const setupSocket = require("./controllers/socketController");
-// const {setSocketInstance} = require("./controllers/user/sendSocketMessage");
+const { initSocket } = require("./lib/socket.js");
 
 dotenv.config();
 
@@ -24,12 +17,12 @@ const app = express();
 const http = require("http");
 const server = http.createServer(app);
 
+initSocket(server);
+// const io = new Server(server, {
+//   cors: { origin: "*" }
+// });
 
-const io = new Server(server, {
-  cors: { origin: "*" }
-});
-
-registerSocketHandlers(io);
+// registerSocketHandlers(io);
 
   // io.on("connection", (socket) => {
   //   console.log("New socket connection: !!!!!!!!1", socket.id);

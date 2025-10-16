@@ -1,5 +1,6 @@
 const stripe = require("../../lib/stripe");
 const UserModel = require("../../models/User");
+const updateUserAmount = require("../socket/socketController");
 
 module.exports = async(req, res) => {
   try {
@@ -32,6 +33,8 @@ module.exports = async(req, res) => {
     console.log("updatedBalance: ", updatedBalance);
 
     await UserModel.updateBalance(userId,updatedBalance);
+
+    updateUserAmount(userId, updatedBalance);
 
     return res.status(200).json({ message: "Success", received: true });
   } catch (error) {
