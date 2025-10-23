@@ -1,5 +1,5 @@
 const express = require("express");
-const stripeController = require("../controllers/paymnet");
+const stripeController = require("../controllers/payment");
 
 const router = express.Router();
 
