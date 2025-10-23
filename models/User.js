@@ -15,6 +15,7 @@ const User = Schema({
     type: String,
     unique: true
   },
+  phone: String,
   password: String,
   role: {
     type: String,
