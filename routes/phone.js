@@ -4,8 +4,9 @@ const phoneController = require("../controllers/phoneNumber");
 
 const router = express.Router();
 
-router.get("/list", checkAuth, phoneController.getPhones);
-router.post("/create", checkAuth, phoneController.createPhone);
-router.delete("/delete", checkAuth, phoneController.deletePhone);
+router.get("/list", phoneController.getPhones);
+router.get("/countries", phoneController.getCountries);
+router.post("/create", phoneController.createPhone);
+router.delete("/delete", phoneController.deletePhone);
 
 module.exports = router;

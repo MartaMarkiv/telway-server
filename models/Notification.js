@@ -4,14 +4,14 @@ const Schema = mongoose.Schema;
 const Notification = Schema({
   title: String,
   text: String,
-  status: {enum: ["active", "inactive"], default: "active"},
+  status: {type: String, enum: ["active", "inactive"], default: "active"},
   user: { type: Schema.Types.ObjectId, ref: "User" },
 },
 {
   timestamps: true
 });
 
-const NotificationModel = mongoose.model("PhoneNumber", Notification);
+const NotificationModel = mongoose.model("Notification", Notification);
 
 module.exports = {
   model: NotificationModel,

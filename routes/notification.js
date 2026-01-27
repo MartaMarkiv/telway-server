@@ -4,6 +4,6 @@ const notificationController = require("../controllers/notification");
 const router = express.Router();
 
 router.post("/add", notificationController.addNotification);
-router.patch("/read", checkAuth, notificationController.readNotification);
+router.patch("/read", notificationController.readNotification);
 
 module.exports = router;

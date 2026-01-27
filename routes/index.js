@@ -11,7 +11,7 @@ const router = express.Router();
 
 router.use("/auth", authRouter);
 router.use("/user", userRouter);
-router.use("/phone", phoneRouter);
+router.use("/phone", checkAuth, phoneRouter);
 router.use("/payment", checkAuth, paymentRouter);
 router.use("/webhook", webhookRouter);
 router.use("/notification", notificationRouter);
