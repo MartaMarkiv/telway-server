@@ -11,7 +11,7 @@ module.exports = async(req, res) => {
 
   if(!user) {
     console.log("Token is expired");
-    return res.status(403).json({message: "Token is expired"});
+    return res.status(401).json({message: "Token is expired"});
   }
 
   jwt.verify(token, process.env.REFRESH_SECRET, (err, user) => {

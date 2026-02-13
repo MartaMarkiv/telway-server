@@ -2,26 +2,23 @@ const config = require("../../config/config");
 
 module.exports = async(req, res) => {
   try {
-    const {group} = req.query;
-    console.log("groupId: ", group);
-     const response = await fetch(`${config.idtApiUrl}/did_groups/${group}/browse_numbers`, {
+    const {code} = req.query;
+    const response = await fetch(`${config.idtApiUrl}/countries/${code}/regions`, {
       headers: {
         "x-api-key": config.idtKey,
         "x-api-secret": config.idtSecret
       }
     });
     if (!response.ok) {
-      console.log(response);
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
-    console.log(data);
 
-    const {numbers} = data;
-    console.log(numbers);
-    return res.status(200).json({numbers});
+    const {regions} = data;
+
+    return res.status(200).json({regions});
   } catch (error) {
-    console.log("Error while getting phone numbers: ", error);
+    console.log("Error while getting regions: ", error);
     return res.status(500).json({success: false, message: "Server error"});
   }
 }
