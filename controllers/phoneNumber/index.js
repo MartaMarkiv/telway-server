@@ -1,5 +1,5 @@
 const getPhones = require("./getPhonesList");
-const createPhone = require("./createPhone");
+const createOrder = require("./createOrder");
 const deletePhone = require("./deletePhone");
 const getCountries = require("./getCountries");
 const getRegions = require("./getRegions");
@@ -7,7 +7,7 @@ const getGroups = require("./getGroups");
 
 module.exports = {
   getPhones,
-  createPhone,
+  createOrder,
   deletePhone,
   getCountries,
   getRegions,

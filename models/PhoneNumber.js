@@ -4,10 +4,11 @@ const Schema = mongoose.Schema;
 const PhoneNumber = Schema({
   number: String,
   country: String,
-  typeNumber: String,
-  expires: Date,
+  region: String,
   status: String,
-  fee: Number,
+  sku: String,
+  setupFee: Number,
+  monthlyFee: Number,
   owner: { type: Schema.Types.ObjectId, ref: "User" }
 },
 {

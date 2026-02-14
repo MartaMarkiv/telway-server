@@ -3,7 +3,6 @@ const config = require("../../config/config");
 module.exports = async(req, res) => {
   try {
     const {group} = req.query;
-    console.log("groupId: ", group);
      const response = await fetch(`${config.idtApiUrl}/did_groups/${group}/browse_numbers`, {
       headers: {
         "x-api-key": config.idtKey,
