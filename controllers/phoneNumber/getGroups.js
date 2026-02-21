@@ -16,6 +16,7 @@ module.exports = async(req, res) => {
       }
     });
     if (!response.ok) {
+      console.log(response);
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
