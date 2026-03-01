@@ -7,10 +7,6 @@ const User = Schema({
     type: Number,
     default: 0
   },
-  activeNumbers: {
-    type: Number,
-    default: 0
-  },
   email: {
     type: String,
     unique: true

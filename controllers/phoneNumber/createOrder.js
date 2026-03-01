@@ -7,7 +7,7 @@ module.exports = async(req, res) => {
     console.log(req.body);
     const {group, number, sku} = req.body;
     if(!group || !number) {
-      return res.status(404).json({message: "Bad request."});
+      return res.status(400).json({message: "Bad request."});
     }
 
     const fetchUrl = `https://api.idtexpress.com/v1/dids/orders`;
@@ -27,55 +27,10 @@ module.exports = async(req, res) => {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
-    console.log(data);
 
     const {order} = data;
-//     const order = {
-//       "id":"f52-6d9-261b",
-//       "created_at":"2020-06-26T11:01:16.000Z",
-//       "status":"Created",
-//       "ordered": {
-//          "quantity": 3
-//       },
-//       "fulfilled": {
-//          "quantity": 0
-//       },
-//       "order_items":[
-//          {
-//             "id":162455,
-//             "status":"Processing",
-//             "order_item_type":"quantity",
-//             "ordered": {
-//                "quantity": 3
-//             },
-//             "fulfilled": {
-//                "quantity": 0
-//             },
-//             "cancelable":false,
-//             "did_group":{
-//                "id":16847,
-//                "name":"SALVADOR ",
-//                "country_calling_code":"55",
-//                "area_code":"71",
-//                "nxx":null,
-//                "toll_free":false,
-//                "country":{
-//                   "name":"BRAZIL",
-//                   "iso":"BR",
-//                   "has_regions":false
-//                },
-//                "fees":{
-//                   "setup_fee":"0.00",
-//                   "monthly_fee":"3.00"                  
-//                }
-//             },
-//             "numbers":[]
-//          }
-//       ]
-// };
-    console.log(order);
 
-    const {order_items} = order;
+    const {order_items, id: orderId} = order;
 
     const {status, did_group} = order_items[0];
 
@@ -93,12 +48,17 @@ module.exports = async(req, res) => {
 
     let amount = (Number(fees.setup_fee) + Number(fees.monthly_fee));
 
+    if(user.balance < amount) {
+      return res.status(400).json({message: "Not enough balance to purchase this number"});
+    }
+
     const createdPhone = await PhoneNumber.create({
       number: number,
       country: countryName,
       region: has_regions ? region.name : "",
       status: status,
       sku: sku,
+      orderId: orderId,
       setupFee: Number(fees.setup_fee),
       monthlyFee:  Number(fees.monthly_fee),
       owner: req.user.id

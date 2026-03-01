@@ -6,6 +6,7 @@ const PhoneNumber = Schema({
   country: String,
   region: String,
   status: String,
+  orderId: String,
   sku: String,
   setupFee: Number,
   monthlyFee: Number,
@@ -22,5 +23,6 @@ module.exports = {
   create:  (phone) => new PhoneNumberModel(phone).save(),
   findByUser:  (userId) => PhoneNumberModel.find({owner: userId}),
   findById:  (_id) => PhoneNumberModel.findOne({_id}),
-  deleteById:  (_id) => PhoneNumberModel.deleteOne({_id})
+  deleteById:  (_id) => PhoneNumberModel.deleteOne({_id}),
+  updateByOrderId:  (orderId, status) => PhoneNumberModel.findOneAndUpdate({orderId}, {status}, { new: true })
 }
