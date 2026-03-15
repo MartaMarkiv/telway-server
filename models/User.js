@@ -11,6 +11,8 @@ const User = Schema({
     type: String,
     unique: true
   },
+  emailNotification: Boolean,
+  smsNotification: Boolean,
   phone: String,
   password: String,
   role: {
@@ -31,9 +33,14 @@ module.exports = {
   create:  (profile) => new UserModel(profile).save(),
   updateToken:  (id, token) => UserModel.findOneAndUpdate({_id: id}, {refreshToken: token}),
   updateBalance:  (id, balance) => UserModel.findOneAndUpdate({_id: id}, {balance}),
-  updateUser:  (id, query) => UserModel.findOneAndUpdate({_id: id}, query),
   deleteToken:  (id) => UserModel.findOneAndUpdate({_id: id}, {refreshToken: ""}),
   findByEmail:  (email) => UserModel.findOne({email}),
   findById:  (_id) => UserModel.findOne({_id}),
   findByToken:  (refreshToken) => UserModel.findOne({refreshToken}),
+  updateUser: (id, query) =>
+  UserModel.findOneAndUpdate(
+    { _id: id },
+    { $set: query },
+    { new: true }
+  ),
 }

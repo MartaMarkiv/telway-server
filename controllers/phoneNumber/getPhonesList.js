@@ -11,7 +11,7 @@ module.exports = async(req, res) => {
     });
     if (!response.ok) {
       console.log(response);
-      throw new Error(`HTTP error! status: ${response.status}`);
+      throw new Error(response.status.text || `Phone Numbers Api error!`,{ status: response.status});
     }
     const data = await response.json();
     console.log(data);
@@ -20,7 +20,9 @@ module.exports = async(req, res) => {
     console.log(numbers);
     return res.status(200).json({numbers});
   } catch (error) {
-    console.log("Error while getting phone numbers: ", error);
-    return res.status(500).json({success: false, message: "Server error"});
+    console.log("Error while getting phone numbers: ");
+    console.log(Object.keys(error));
+    console.log(error.message);
+    return res.status(error.status || 500).json({success: false, message: error.message || "Server error"});
   }
 }

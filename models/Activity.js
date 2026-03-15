@@ -6,6 +6,7 @@ const Activity = Schema({
   duration: Number,
   price: Number,
   type: String,
+  receiver: String,
   user: { type: Schema.Types.ObjectId, ref: "User" }
 },
 {
