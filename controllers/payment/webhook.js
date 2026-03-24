@@ -34,6 +34,8 @@ module.exports = async(req, res) => {
 
     await UserModel.updateBalance(userId,updatedBalance);
 
+    //TO DO: CREATE ACTIVITY. CHECK CREDIT CARD NUMBER
+
     updateUserAmount(userId, updatedBalance);
 
     return res.status(200).json({ message: "Success", received: true });
