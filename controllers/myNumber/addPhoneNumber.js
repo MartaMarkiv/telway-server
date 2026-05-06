@@ -10,7 +10,7 @@ module.exports = async(req, res) => {
 
     const createdPhone = await MyNumber.create({
       number: number,
-      name: countryName,
+      name: name,
       isFavorite: !!isFavorite
     });
 
