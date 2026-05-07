@@ -8,10 +8,16 @@ module.exports = async(req, res) => {
       return res.status(400).json({message: "Bad request."});
     }
 
+    const phonesList = await MyNumber.findByNumber(number);
+    if(phonesList && phonesList.length > 0) {
+      return res.status(400).json({message: "This number already exists."});
+    }
+
     const createdPhone = await MyNumber.create({
       number: number,
       name: name,
-      isFavorite: !!isFavorite
+      isFavorite: !!isFavorite,
+      owner: req.user.id
     });
 
     console.log("createdPhone: ", createdPhone);

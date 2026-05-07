@@ -64,7 +64,7 @@ module.exports = async(req, res) => {
       owner: req.user.id
     });
 
-    console.log("createdPhone: ", createdPhone);
+    console.log("created order phone: ", createdPhone);
 
     const user = await User.findById(req.user.id);
     console.log("user balance: ", user.balance);
