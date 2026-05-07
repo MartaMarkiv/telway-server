@@ -20,6 +20,7 @@ module.exports = {
   model: MyNumberModel,
   create:  (phone) => new MyNumberModel(phone).save(),
   findByUser:  (userId) => MyNumberModel.find({owner: userId}),
+  findByNumber:  (number) => MyNumberModel.find({number}),
   findById:  (_id) => MyNumberModel.findOne({_id}),
   deleteById:  (_id) => MyNumberModel.deleteOne({_id}),
 }
