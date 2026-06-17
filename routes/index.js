@@ -7,6 +7,7 @@ const webhookRouter = require("./webhook");
 const phoneRouter = require("./phone");
 const myPhoneRouter = require("./phoneNumber");
 const notificationRouter = require("./notification");
+const sipRouter = require("./sip");
 
 const router = express.Router();
 
@@ -17,5 +18,5 @@ router.use("/number", checkAuth, myPhoneRouter);
 router.use("/payment", checkAuth, paymentRouter);
 router.use("/webhook", webhookRouter);
 router.use("/notification", notificationRouter);
-
+router.use("/sip", checkAuth, sipRouter);
 module.exports = router;
