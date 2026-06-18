@@ -3,7 +3,7 @@ const config = require("../../config/config");
 
 module.exports = async(req, res) => {
   try {
-    const wsUrl = process.env.SIP_WS_URL || 'ws://62.171.166.141:8088/ws'; 
+    const wsUrl = process.env.SIP_WS_URL || 'wss://62.171.166.141:5160/wss'; 
 
     return res.status(200).json({
       sipUri: 'client1',
