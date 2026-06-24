@@ -2,7 +2,8 @@ module.exports = async(req, res) => {
   try {
 
     console.log("get credential request");
-    const wsUrl = 'ws://62.171.166.141:5060/ws';
+    // const wsUrl = 'ws://62.171.166.141:5060/ws';
+    const wsUrl = 'ws://62.171.166.141:5160/ws';
     // const wsUrl = 'ws://62.171.166.141:5066/ws';
 
     return res.status(200).json({
