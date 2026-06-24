@@ -2,7 +2,7 @@ module.exports = async(req, res) => {
   try {
 
     console.log("get credential request");
-    const wsUrl = process.env.SIP_WS_URL || 'wss://62.171.166.141:5160/wss'; 
+    const wsUrl = process.env.SIP_WS_URL || 'wss://62.171.166.141:5060/wss'; 
 
     return res.status(200).json({
       sipUri: 'client1',
